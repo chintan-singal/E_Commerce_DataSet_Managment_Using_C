@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, #1a1a1a, #333);
+    color: #fff;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    margin-top: 1rem;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 1rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+section {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eee;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: linear-gradient(135deg, #1a1a1a, #333);
+    color: #fff;
+    width: 100%;
+    margin-top: auto;
+}
+
+.code-block {
+    background: #2b2b2b;
+    color: #f8f8f2;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    line-height: 1.5;
+    margin: 1rem 0;
+    border: 1px solid #3b3b3b;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.code-block code {
+    display: block;
+    white-space: pre;
+}
+
+/* Syntax highlighting */
+.code-block .keyword {
+    color: #c678dd; /* purple for keywords */
+}
+
+.code-block .string {
+    color: #98c379; /* green for strings */
+}
+
+.code-block .comment {
+    color: #5c6370; /* grey for comments */
+    font-style: italic;
+}
+
+.code-block .function {
+    color: #61afef; /* blue for functions */
+}
+
+.code-block .number {
+    color: #d19a66; /* orange for numbers */
+}
+
+.code-block .type {
+    color: #e5c07b; /* yellow for types */
+}
+
+/* Add line numbers */
+.code-block {
+    counter-reset: line;
+}
+
+.code-block code {
+    position: relative;
+    padding-left: 3.5em;
+}
+
+.code-block code > * {
+    position: relative;
+}
+
+.code-block code > *:before {
+    content: counter(line);
+    counter-increment: line;
+    position: absolute;
+    left: -3em;
+    width: 2.5em;
+    text-align: right;
+    color: #495162;
+    padding-right: 1em;
+    border-right: 1px solid #3e4451;
+    user-select: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    .code-block {
+        padding: 1rem;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 0.5rem;
+    }
+}

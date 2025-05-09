@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Overview</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>📊 Dataset Overview</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="source.html">Source Code</a>
+            <a href="explanation.html">Explanation</a>
+            <a href="dataset.html">Dataset</a>
+        </nav>
+    </header>
+    <main>
+        <section style="text-align:center; margin:2rem auto 0 auto;">
+            <a href="dataset.csv" download style="display:inline-block; background:#007b83; color:#fff; padding:1rem 2.5rem; border-radius:30px; text-decoration:none; font-weight:600; font-size:1.1rem; margin-bottom:2rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); transition:background 0.2s;">⬇️ Download Full Dataset (CSV)</a>
+        </section>
+        <section style="max-width:900px; margin:2rem auto;">
+            <h2>About the Dataset</h2>
+            <p>
+                This project uses a real-world e-commerce order dataset containing <strong>51,000+</strong> entries. Each row represents a customer order, with fields capturing order details, customer information, product data, and transaction specifics. The dataset is used to demonstrate efficient data management using hashing and linked lists in C.
+            </p>
+            <ul style="font-size:1.1rem; line-height:1.7;">
+                <li><strong>Source:</strong> Provided for academic demonstration</li>
+                <li><strong>Total Entries:</strong> 51,000+</li>
+                <li><strong>Format:</strong> CSV (Comma-Separated Values)</li>
+                <li><strong>Sampled:</strong> Only a small portion is shown below for illustration</li>
+            </ul>
+        </section>
+        <section style="max-width:900px; margin:2rem auto;">
+            <h2>Fields & Description</h2>
+            <table style="width:100%; border-collapse:collapse; margin-bottom:2rem;">
+                <thead>
+                    <tr style="background:#f4f4f4;">
+                        <th style="padding:8px; border:1px solid #ddd;">Field</th>
+                        <th style="padding:8px; border:1px solid #ddd;">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Order_Date</td><td style="padding:8px; border:1px solid #ddd;">Date of the order (YYYY-MM-DD)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Time</td><td style="padding:8px; border:1px solid #ddd;">Time of order placement (HH:MM:SS)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Aging</td><td style="padding:8px; border:1px solid #ddd;">Order aging in days</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Customer_Id</td><td style="padding:8px; border:1px solid #ddd;">Unique customer identifier</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Gender</td><td style="padding:8px; border:1px solid #ddd;">Customer gender</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Device_Type</td><td style="padding:8px; border:1px solid #ddd;">Device used for order (Web/Mobile)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Customer_Login_type</td><td style="padding:8px; border:1px solid #ddd;">Login type (Member/Guest)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Product_Category</td><td style="padding:8px; border:1px solid #ddd;">Product category (e.g., Auto & Accessories)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Product</td><td style="padding:8px; border:1px solid #ddd;">Product name</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Sales</td><td style="padding:8px; border:1px solid #ddd;">Sales amount (currency units)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Quantity</td><td style="padding:8px; border:1px solid #ddd;">Quantity ordered</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Discount</td><td style="padding:8px; border:1px solid #ddd;">Discount applied (fraction)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Profit</td><td style="padding:8px; border:1px solid #ddd;">Profit from the order</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Shipping_Cost</td><td style="padding:8px; border:1px solid #ddd;">Shipping cost for the order</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Order_Priority</td><td style="padding:8px; border:1px solid #ddd;">Order priority (e.g., High, Medium, Critical)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Payment_method</td><td style="padding:8px; border:1px solid #ddd;">Payment method (e.g., credit_card, money_order)</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section style="max-width:900px; margin:2rem auto;">
+            <h2>Sample Data (First 10 Rows)</h2>
+            <div style="overflow-x:auto;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+                    <thead style="background:#f4f4f4;">
+                        <tr>
+                            <th>Order_Date</th><th>Time</th><th>Aging</th><th>Customer_Id</th><th>Gender</th><th>Device_Type</th><th>Customer_Login_type</th><th>Product_Category</th><th>Product</th><th>Sales</th><th>Quantity</th><th>Discount</th><th>Profit</th><th>Shipping_Cost</th><th>Order_Priority</th><th>Payment_method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2018-01-02</td><td>10:56:33</td><td>8.0</td><td>37077</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Media Players</td><td>140.0</td><td>1.0</td><td>0.3</td><td>46.0</td><td>4.6</td><td>Medium</td><td>credit_card</td></tr>
+                        <tr><td>2018-07-24</td><td>20:41:37</td><td>2.0</td><td>59173</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Speakers</td><td>211.0</td><td>1.0</td><td>0.3</td><td>112.0</td><td>11.2</td><td>Medium</td><td>credit_card</td></tr>
+                        <tr><td>2018-11-08</td><td>08:38:49</td><td>8.0</td><td>41066</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Body Covers</td><td>117.0</td><td>5.0</td><td>0.1</td><td>31.2</td><td>3.1</td><td>Critical</td><td>credit_card</td></tr>
+                        <tr><td>2018-04-18</td><td>19:28:06</td><td>7.0</td><td>50741</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car & Bike Care</td><td>118.0</td><td>1.0</td><td>0.3</td><td>26.2</td><td>2.6</td><td>High</td><td>credit_card</td></tr>
+                        <tr><td>2018-08-13</td><td>21:18:39</td><td>9.0</td><td>53639</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Tyre</td><td>250.0</td><td>1.0</td><td>0.3</td><td>160.0</td><td>16.0</td><td>Critical</td><td>credit_card</td></tr>
+                        <tr><td>2018-07-09</td><td>21:57:05</td><td>8.0</td><td>39783</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Bike Tyres</td><td>72.0</td><td>1.0</td><td>0.3</td><td>24.0</td><td>2.4</td><td>Critical</td><td>credit_card</td></tr>
+                        <tr><td>2018-05-16</td><td>13:10:30</td><td>1.0</td><td>26767</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Mat</td><td>54.0</td><td>1.0</td><td>0.3</td><td>54.0</td><td>5.4</td><td>High</td><td>credit_card</td></tr>
+                        <tr><td>2018-06-23</td><td>18:29:09</td><td>7.0</td><td>20719</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Seat Covers</td><td>114.0</td><td>5.0</td><td>0.2</td><td>22.6</td><td>2.3</td><td>Critical</td><td>credit_card</td></tr>
+                        <tr><td>2018-07-29</td><td>11:55:02</td><td>7.0</td><td>46947</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Pillow & Neck Rest</td><td>231.0</td><td>5.0</td><td>0.3</td><td>116.4</td><td>11.6</td><td>Critical</td><td>credit_card</td></tr>
+                        <tr><td>2018-05-16</td><td>19:41:10</td><td>10.0</td><td>31839</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Media Players</td><td>140.0</td><td>1.0</td><td>0.2</td><td>54.4</td><td>5.4</td><td>Critical</td><td>money_order</td></tr>
+                        <tr><td>2018-07-13</td><td>19:58:11</td><td>10.0</td><td>22249</td><td>Female</td><td>Web</td><td>Member</td><td>Auto & Accessories</td><td>Car Speakers</td><td>211.0</td><td>4.0</td><td>0.1</td><td>122.6</td><td>12.3</td><td>Critical</td><td>credit_card</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top:1.5rem; color:#666; font-size:0.98rem;">For full data, see <code>dataset.csv</code> in the project folder.</p>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Chintan Kumar Singal</p>
+    </footer>
+</body>
+</html>

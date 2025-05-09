@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="code-style.css">
+</head>
+<body>
+    <header>
+        <h1>Source Code</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="source.html">Source Code</a>
+            <a href="explanation.html">Explanation</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Code</h2>
+            <pre class="code-block"><code>
+                
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#define TableSize 78901
+
+typedef struct Entry {
+    char orderDate[30];
+    char time[30];
+    char aging[30];
+    int coustomerID;
+    char gender[30];
+    char devicetype[30];
+    char logitype[30];
+    char productCategory[50];
+    char productName[50];
+    float sales;
+    int quantity;
+    float discount;
+    float profit;
+    float shippingCost;
+    char orderpriority[30];
+    char paymentMethod[30];
+    struct Entry *next;
+} Entry;
+
+Entry *hashTable[TableSize];
+
+// Function declarations
+void insertEntry(Entry *hashTable[], Entry *newEntry);
+void writeToCSV();
+void clearBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void initHashTable() {
+    for (int i = 0; i < TableSize; i++) {
+        hashTable[i] = NULL;
+    }
+}
+
+int hashFunction(int customerID) {
+    return customerID % TableSize;
+}
+
+Entry *createEntry(char* fields[]) {
+    static int counter = 0;
+    Entry *newEntry = (Entry *)malloc(sizeof(Entry));
+    strcpy(newEntry->orderDate, fields[0]);
+    strcpy(newEntry->time, fields[1]);
+    strcpy(newEntry->aging, fields[2]);
+    newEntry->coustomerID = atoi(fields[3]);
+    strcpy(newEntry->gender, fields[4]);
+    strcpy(newEntry->devicetype, fields[5]);
+    strcpy(newEntry->logitype, fields[6]);
+    strcpy(newEntry->productCategory, fields[7]);
+    strcpy(newEntry->productName, fields[8]);
+    newEntry->sales = atof(fields[9]);
+    newEntry->quantity = atoi(fields[10]);
+    newEntry->discount = atof(fields[11]);
+    newEntry->profit = atof(fields[12]);
+    newEntry->shippingCost = atof(fields[13]);
+    strcpy(newEntry->orderpriority, fields[14]);
+    strcpy(newEntry->paymentMethod, fields[15]);
+    newEntry->next = NULL;
+
+    if (counter < 10) {
+        printf("Entry %d: Customer ID = %d, Index = %d\n", 
+               counter + 1, 
+               newEntry->coustomerID, 
+               hashFunction(newEntry->coustomerID));
+        counter++;
+    }
+
+    insertEntry(hashTable, newEntry);
+    return newEntry;
+}
+
+void insertEntry(Entry *hashTable[], Entry *newEntry) {
+    int index = hashFunction(newEntry->coustomerID);
+    if (hashTable[index] == NULL) {
+        hashTable[index] = newEntry;
+    } else {
+        Entry *current = hashTable[index];
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        newEntry->next = hashTable[index];
+        hashTable[index] = newEntry;
+    }
+}
+
+void insertNewEntry() {
+    Entry *newEntry = (Entry *)malloc(sizeof(Entry));
+    printf("\nEnter Customer Details:\n");
+    printf("Customer ID: ");
+    scanf("%d", &newEntry->coustomerID);
+    clearBuffer();
+    printf("Order Date (DD-MM-YYYY): ");
+    scanf("%s", newEntry->orderDate);
+    clearBuffer();
+    printf("Time (HH:MM): ");
+    scanf("%s", newEntry->time);
+    clearBuffer();
+    printf("Aging: ");
+    scanf("%s", newEntry->aging);
+    clearBuffer();
+    printf("Gender: ");
+    scanf("%s", newEntry->gender);
+    clearBuffer();
+    printf("Device Type: ");
+    scanf("%s", newEntry->devicetype);
+    clearBuffer();
+    printf("Login Type: ");
+    scanf("%s", newEntry->logitype);
+    clearBuffer();
+    printf("Product Category: ");
+    scanf("%s", newEntry->productCategory);
+    clearBuffer();
+    printf("Product Name: ");
+    scanf("%s", newEntry->productName);
+    clearBuffer();
+    printf("Sales: ");
+    scanf("%f", &newEntry->sales);
+    clearBuffer();
+    printf("Quantity: ");
+    scanf("%d", &newEntry->quantity);
+    clearBuffer();
+    printf("Discount: ");
+    scanf("%f", &newEntry->discount);
+    clearBuffer();
+    printf("Profit: ");
+    scanf("%f", &newEntry->profit);
+    clearBuffer();
+    printf("Shipping Cost: ");
+    scanf("%f", &newEntry->shippingCost);
+    clearBuffer();
+    printf("Order Priority: ");
+    scanf("%s", newEntry->orderpriority);
+    clearBuffer();
+    printf("Payment Method: ");
+    scanf("%s", newEntry->paymentMethod);
+    clearBuffer();
+    newEntry->next = NULL;
+    insertEntry(hashTable, newEntry);
+    writeToCSV();
+    printf("\nNew entry successfully added and saved to file!\n");
+}
+
+void parseCSVLine(char *line, char *fields[]) {
+    int i = 0;
+    char *token = strtok(line, ",\n");
+    while (token != NULL && i < 16) {
+        fields[i++] = token;
+        token = strtok(NULL, ",\n");
+    }
+}
+
+void searchByCustomerID(int id) {
+    int index = hashFunction(id);
+    printf("\nSearching for ID %d at index %d\n", id, index);
+    int found = 0;
+    Entry* current = hashTable[index]; 
+    if (current == NULL) {
+        printf("Not found", index);
+    }
+    printf("Entries at index %d:\n", index);
+    while (current != NULL) {
+        if(current->coustomerID==id){
+            printf("Found Coustomer Entry(s):\n");
+            printf("Customer ID: %d\n", current->coustomerID);
+            printf("Order Date: %s\n", current->orderDate);
+            printf("Time: %s\n", current->time);
+            printf("Aging: %s\n", current->aging);
+            printf("Gender: %s\n", current->gender);
+            printf("Device Type: %s\n", current->devicetype);
+            printf("Login Type: %s\n", current->logitype);
+            printf("Product Category: %s\n", current->productCategory);
+            printf("Product Name: %s\n", current->productName);
+            printf("Sales: %.2f\n", current->sales);
+            printf("Quantity: %d\n", current->quantity);
+            printf("Discount: %.2f\n", current->discount);
+            printf("Profit: %.2f\n", current->profit);
+            printf("Shipping Cost: %.2f\n", current->shippingCost);
+            printf("Order Priority: %s\n", current->orderpriority);
+            printf("Payment Method: %s\n", current->paymentMethod);
+            printf("\n");
+            found=1;
+            }
+            current=current->next;
+}
+if(found==0){
+    printf("Customer Not Found\n");
+}
+}
+
+void deleteByCustomerID(int id){
+    Entry* prev;
+    Entry* current;
+    int index=hashFunction(id);
+    prev=NULL;
+    current=hashTable[index];
+    while(current!=NULL){
+        if(current->coustomerID==id){
+            if(prev==NULL){
+                hashTable[index]=current->next;
+                current=hashTable[index];
+            }
+            else{
+                prev->next=current->next;
+                current=prev->next;
+            }
+        }
+        else{
+            prev=current;
+            current=current->next;
+        }
+    }
+}
+
+void modifyCustomerbyID(int id){
+    int index=hashFunction(id);
+    Entry* current;
+    current= hashTable[index];
+    int count=1;
+    int choice;
+    while(current!=NULL){
+        if(current->coustomerID==id){
+            printf("ENTRY NUMBER:-  (%d)",count);
+            printf("Customer ID: %d\n", current->coustomerID);
+            printf("Order Date: %s\n", current->orderDate);
+            printf("Time: %s\n", current->time);
+            printf("Aging: %s\n", current->aging);
+            printf("Gender: %s\n", current->gender);
+            printf("Device Type: %s\n", current->devicetype);
+            printf("Login Type: %s\n", current->logitype);
+            printf("Product Category: %s\n", current->productCategory);
+            printf("Product Name: %s\n", current->productName);
+            printf("Sales: %.2f\n", current->sales);
+            printf("Quantity: %d\n", current->quantity);
+            printf("Discount: %.2f\n", current->discount);
+            printf("Profit: %.2f\n", current->profit);
+            printf("Shipping Cost: %.2f\n", current->shippingCost);
+            printf("Order Priority: %s\n", current->orderpriority);
+            printf("Payment Method: %s\n", current->paymentMethod);
+            printf("\n");
+            count++;
+        }
+        current=current->next;
+    }
+    printf("ENTER ENTRY NUMBER TO MODIFY\n");
+    scanf("%d",&choice);
+
+    count=1;
+    Entry* current2;
+    current2=hashTable[index];
+    while ((current2!=NULL))
+    {
+        if(current2->coustomerID==id){
+            if(count==choice){
+                printf("ENTER THE NEW VALUES\n");
+                printf("ENETR NEW ORDER DATE :-");
+                scanf("%s", current2->orderDate);
+                clearBuffer();
+                printf("ENTER NEW TIME:-");
+                scanf("%s", current2->time);
+                clearBuffer();
+                printf("ENTER NEW AGING:-");
+                scanf("%s", current2->aging);
+                clearBuffer();
+                printf("ENTER NEW GENDER:-");
+                scanf("%s", current2->gender);
+                clearBuffer();
+                printf("ENTER NEW DEVICE TYPE:-");
+                scanf("%s", current2->devicetype);
+                clearBuffer();
+                printf("ENTER NEW LOGIN TYPE:-");
+                scanf(" %s", current2->logitype);
+                clearBuffer();
+                printf("ENTER NEW PRODUCT CATEGORY:-");
+                scanf("%s", current2->productCategory);
+                clearBuffer();
+                printf("ENTER NEW PRODUCT NAME:-");
+                scanf(" %s", current2->productName);
+                clearBuffer();
+                printf("ENTER NEW SALES:-");
+                scanf("%f", &current2->sales);
+                clearBuffer();
+                printf("ENTER NEW QUANTITY:-");
+                scanf("%d", &current2->quantity);
+                clearBuffer();
+                printf("ENTER NEW DISCOUNT:-");
+                scanf("%f", &current2->discount);
+                clearBuffer();
+                printf("ENTER NEW PROFIT:-");
+                scanf(" %f", &current2->profit);
+                clearBuffer();
+                printf("ENTER NEW SHIPPING COST");
+                scanf("%f", &current2->shippingCost);
+                clearBuffer();
+                printf("ENTER NEW ORDER PRIORITY:-");
+                scanf("%s", current2->orderpriority);
+                clearBuffer();
+                printf("ENTER NEW PAYMENT METHOD:-");
+                scanf("%s", current2->paymentMethod);
+                clearBuffer();
+                printf("\n");
+                printf("UPDATED SUCCESFULLY\n");
+                break;
+            }
+            count++;
+        }
+        current2=current2->next;
+    }
+    
+writeToCSV();   
+
+}
+
+void writeToCSV() {
+    FILE *fp = fopen("datasetcopy.csv", "w");
+    if (!fp) {
+        printf("Failed to open file for writing\n");
+        return;
+    }
+    fprintf(fp, "Order Date,Time,Aging,Customer ID,Gender,Device Type,Login Type,Product Category,Product Name,Sales,Quantity,Discount,Profit,Shipping Cost,Order Priority,Payment Method\n");
+    for (int i = 0; i < TableSize; i++) {
+        Entry *current = hashTable[i];
+        while (current != NULL) {
+            fprintf(fp, "%s,%s,%s,%d,%s,%s,%s,%s,%s,%.2f,%d,%.2f,%.2f,%.2f,%s,%s\n",
+                current->orderDate,
+                current->time,
+                current->aging,
+                current->coustomerID,
+                current->gender,
+                current->devicetype,
+                current->logitype,
+                current->productCategory,
+                current->productName,
+                current->sales,
+                current->quantity,
+                current->discount,
+                current->profit,
+                current->shippingCost,
+                current->orderpriority,
+                current->paymentMethod
+            );
+            current = current->next;
+        }
+    }
+
+    fclose(fp);
+    printf("Data successfully written to CSV file.\n");
+}
+
+int main() {
+    initHashTable();
+    
+    FILE *fp = fopen("datasetcopy.csv", "r");
+    if (!fp) {
+        printf("Failed to open file\n");
+        return 1;
+    }
+
+    char line[1024];
+    char *fields[16];
+
+    fgets(line, sizeof(line), fp); 
+
+    while (fgets(line, sizeof(line), fp)) {
+        parseCSVLine(line, fields);
+        createEntry(fields);
+    }
+
+    fclose(fp);
+    printf("Hash table populated from file successfully.\n");
+
+    int choice, customerID;
+    while(1) {
+        printf("\n=== E-Commerce Data Management System ===\n");
+        printf("1. Search Customer by ID\n");
+        printf("2. Insert New Customer Entry\n");
+        printf("3. Modify Customer Entry\n");
+        printf("4. Delete Customer Entry\n");
+        printf("5. Save and Exit\n");
+        printf("Enter your choice (1-5): ");
+        
+        scanf("%d", &choice);
+        clearBuffer();
+
+        switch(choice) {
+            case 1:
+                printf("Enter Customer ID to search: ");
+                scanf("%d", &customerID);
+                clearBuffer();
+                searchByCustomerID(customerID);
+                break;
+                
+            case 2:
+                insertNewEntry();
+                break;
+                
+            case 3:
+                printf("Enter Customer ID to modify: ");
+                scanf("%d", &customerID);
+                clearBuffer();
+                modifyCustomerbyID(customerID);
+                break;
+                
+            case 4:
+                printf("Enter Customer ID to delete: ");
+                scanf("%d", &customerID);
+                clearBuffer();
+                deleteByCustomerID(customerID);
+                writeToCSV();
+                printf("Customer entry deleted and changes saved to file.\n");
+                break;
+                
+            case 5:
+                writeToCSV();
+                printf("Changes saved. Exiting program.\n");
+                return 0;
+                
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Chintan Kumar Singal</p>
+    </footer>
+</body>
+</html>

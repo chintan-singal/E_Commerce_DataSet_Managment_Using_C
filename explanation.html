@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Explanation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Explanation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="source.html">Source Code</a>
+            <a href="explanation.html">Explanation</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>📦 E-Commerce Data Management System — Project Explanation</h2>
+            <h3>🧠 Overview</h3>
+            <p>
+                This project is a command-line E-Commerce Data Management System written in C, designed to efficiently manage customer order data using hash tables with chaining. It supports complete CRUD operations and ensures data persistence through CSV file integration.
+            </p>
+
+            <h3>🏗️ Data Structure</h3>
+            <ul>
+                <li><strong>Hash Table with Chaining:</strong> Each index in the hash table points to a linked list of entries, handling collisions and allowing multiple orders per customer.</li>
+                <li><strong>Hash Function:</strong> <code>index = customer_id % TABLE_SIZE;</code> — A simple modulo-based hash function for mapping customer IDs to indices. Efficient for datasets with IDs within the table size, but can be memory-inefficient for large tables.</li>
+            </ul>
+
+            <h3>⚙️ Core Functionalities</h3>
+            <ul>
+                <li><strong>➕ Create (Insert):</strong> O(1) time. Computes hash index and adds new entry to the beginning of the chain for fast insertion.</li>
+                <li><strong>🔍 Read (Search):</strong> O(1) best, O(n) worst. Finds entries by customer ID.</li>
+                <li><strong>✏️ Update (Modify):</strong> Searches all entries for a customer ID, allows user to select and modify an entry. Supports multiple orders per customer.</li>
+                <li><strong>❌ Delete:</strong> Deletes all entries for a given customer ID (does not support selective deletion among multiple orders for the same ID).</li>
+            </ul>
+
+            <h4>3.2 File I/O</h4>
+            <ul>
+                <li><strong>📥 CSV File Reading:</strong> Loads saved entries from a CSV file at startup.</li>
+                <li><strong>📤 CSV File Writing:</strong> O(n) time. Saves all current data back to the CSV file, ensuring persistence across sessions.</li>
+            </ul>
+
+            <h3>🖥️ User Interface</h3>
+            <ul>
+                <li><strong>Simplicity:</strong> Console-based menu with numbered options.</li>
+                <li><strong>Feedback:</strong> Confirmation messages for user actions.</li>
+                <li><strong>Validation:</strong> Uses <code>clearBuffer()</code> to handle input errors.</li>
+                <li><strong>Persistence:</strong> Changes saved after every update and before exit.</li>
+            </ul>
+
+            <h3>📊 Performance</h3>
+            <table style="width:100%; border-collapse: collapse; margin-bottom: 1.5rem;">
+                <thead>
+                    <tr style="background:#f4f4f4;">
+                        <th style="padding:8px; border:1px solid #ddd;">Operation</th>
+                        <th style="padding:8px; border:1px solid #ddd;">Average Case</th>
+                        <th style="padding:8px; border:1px solid #ddd;">Worst Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Insert</td><td style="padding:8px; border:1px solid #ddd;">O(1)</td><td style="padding:8px; border:1px solid #ddd;">O(1)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Search</td><td style="padding:8px; border:1px solid #ddd;">O(1)</td><td style="padding:8px; border:1px solid #ddd;">O(n)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Update</td><td style="padding:8px; border:1px solid #ddd;">O(1)</td><td style="padding:8px; border:1px solid #ddd;">O(n)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">Delete</td><td style="padding:8px; border:1px solid #ddd;">O(1)</td><td style="padding:8px; border:1px solid #ddd;">O(n)</td></tr>
+                    <tr><td style="padding:8px; border:1px solid #ddd;">CSV Write</td><td style="padding:8px; border:1px solid #ddd;">O(n)</td><td style="padding:8px; border:1px solid #ddd;">O(n)</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Space Complexity:</strong> O(n + m), where n = number of entries, m = hash table size. The design prioritizes speed over memory.</p>
+
+            <h3>🧪 Testing & Demonstration</h3>
+            <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 2rem;">
+                <h4>🔍 Search Operation</h4>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="search_vsc.png" alt="Search in VS Code" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Search operation in VS Code terminal</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="search_column.png" alt="Search Table Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Search result displayed in table format</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="searching_box.png" alt="Search Box Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Search result in box output</figcaption>
+                </figure>
+
+                <h4>➕ Insert Operation</h4>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="insert_vsc.png" alt="Insert in VS Code" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Insert operation in VS Code terminal</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="insert_column.png" alt="Insert Table Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Inserted entry shown in table</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="insert_box.png" alt="Insert Box Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Inserted entry shown in box output</figcaption>
+                </figure>
+
+                <h4>✏️ Modify Operation</h4>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="modify_vsc.png" alt="Modify in VS Code" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Modify operation in VS Code terminal</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="modfiy_before_column.png" alt="Modify Before Table Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Table before modification</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="modify_after_column.png" alt="Modify After Table Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Table after modification</figcaption>
+                </figure>
+
+                <h4>❌ Delete Operation</h4>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="delete_vsc_before1.png" alt="Delete Before 1" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Delete operation (before) in VS Code terminal</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="delete_vsc_before2.png" alt="Delete Before 2" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Delete operation (before) in VS Code terminal (continued)</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="delete_vsc.png" alt="Delete in VS Code" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Delete operation in VS Code terminal</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="delete_after.png" alt="Delete After Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Output after deletion</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="delete_box.png" alt="Delete Box Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Box output after deletion</figcaption>
+                </figure>
+                <figure style="margin:0 0 1.5rem 0;">
+                    <img src="delete_column_before.png" alt="Delete Column Before Output" style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    <figcaption>Table before deletion</figcaption>
+                </figure>
+            </div>
+
+            <h3>⚠️ Limitations</h3>
+            <ul>
+                <li>High Memory Usage: Fixed-size table wastes memory.</li>
+                <li>No Memory Deallocation: Deleting entries does not free memory.</li>
+                <li>Limited Search: Only supports lookup by customer ID.</li>
+                <li>Basic UI: Console interface lacks visuals.</li>
+                <li>Weak Input Validation: Few safeguards against invalid user inputs.</li>
+            </ul>
+
+            <h3>🔧 Future Improvements</h3>
+            <ul>
+                <li>Dynamic Hash Table: Resize table as entries grow to optimize space.</li>
+                <li>Flexible Search Options: Allow searching by product name, date, etc.</li>
+                <li>Better Memory Management: Free memory for deleted entries.</li>
+                <li>Improved Hash Function: More advanced hashing technique.</li>
+                <li>Analytics and Reporting: Include dashboards or statistics.</li>
+                <li>Concurrency Support: Multi-threading for handling large datasets.</li>
+                <li>Stronger Validation: Reject invalid or malformed inputs.</li>
+            </ul>
+
+            <h3>✅ Conclusion</h3>
+            <p>
+                The E-Commerce Data Management System is a strong, practical application of hash tables. It provides efficient CRUD operations, real-world use of chaining, and simple CSV-based persistence. While improvements are needed in memory handling and UI, the project effectively demonstrates a data-structures-driven solution to managing e-commerce order data.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Chintan Kumar Singal</p>
+    </footer>
+</body>
+</html>
